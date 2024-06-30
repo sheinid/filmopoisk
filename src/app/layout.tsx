@@ -6,7 +6,7 @@ import { Header } from "widgets/header";
 
 import { Providers } from "./providers";
 
-import styles from "app/layout/layout.module.css";
+import styles from "./layout.module.css";
 
 export const metadata: Metadata = {
 	title: "Фильмопоиск",

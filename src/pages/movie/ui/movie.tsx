@@ -45,6 +45,19 @@ const Movie = () => {
 					</div>
 				</div>
 			</section>
+
+			<section className={styles.actors}>
+				<h2 className={styles.actorstitle}>Актеры</h2>
+
+				<ul className={styles.list}>
+					{data?.actors.map((actor) => (
+						<li key={actor.name} className={styles.actor}>
+							<img className={styles.actorphoto} src={actor.photo} alt="" />
+							<span className={styles.actorname}>{actor.name}</span>
+						</li>
+					))}
+				</ul>
+			</section>
 		</>
 	);
 };

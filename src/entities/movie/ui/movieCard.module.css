@@ -83,5 +83,6 @@
 }
 
 .rating {
+	z-index: 20;
 	flex-shrink: 0;
 }

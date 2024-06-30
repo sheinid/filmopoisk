@@ -1,5 +1,7 @@
 import { movieSlice } from "entities/movie";
+import { Rating } from "features/rating";
 import { useParams } from "react-router-dom";
+import { Loader } from "shared/ui/loader/loader";
 
 import styles from "./movie.module.css";
 
@@ -13,6 +15,10 @@ const Movie = () => {
 		return <div>Такого фильма не существует</div>;
 	}
 
+	if (isFetching) {
+		return <Loader />;
+	}
+
 	return (
 		<>
 			<section className={styles.container}>
@@ -22,7 +28,9 @@ const Movie = () => {
 				<div className={styles.content}>
 					<div className={styles.header}>
 						<h1 className={styles.title}>{data?.title}</h1>
-						<div className={styles.rating}></div>
+						<div className={styles.rating}>
+							<Rating movieId={movieId || ""} />
+						</div>
 					</div>
 
 					<div className={styles.info}>

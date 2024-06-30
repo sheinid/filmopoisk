@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { Rating } from "features/rating";
 import { Link } from "react-router-dom";
 
 import { ShortMovieInfo } from "../model/types";
@@ -6,7 +7,7 @@ import { ShortMovieInfo } from "../model/types";
 import styles from "./movieCard.module.css";
 
 export const MovieCard = (props: ShortMovieInfo) => {
-	const { id, title, description, release_year, genre, poster, rating } = props;
+	const { id, title, description, release_year, genre, poster } = props;
 
 	return (
 		<li className={styles.wrapper}>
@@ -32,7 +33,7 @@ export const MovieCard = (props: ShortMovieInfo) => {
 						</div>
 					</div>
 					<div className={styles.rating}>
-						<p className={styles.rating}>Рейтинг: {rating}</p>
+						<Rating movieId={id} />
 					</div>
 				</div>
 			</Link>

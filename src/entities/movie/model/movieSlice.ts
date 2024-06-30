@@ -35,6 +35,10 @@ export const movieSlice = createApi({
 			query: ({ id, rating }) => ({
 				url: `rateMovie`,
 				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${localStorage.getItem("token")}`,
+				},
 				body: { movieId: id, user_rate: rating },
 			}),
 		}),

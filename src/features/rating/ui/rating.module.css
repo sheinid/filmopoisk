@@ -1,0 +1,45 @@
+.container {
+	z-index: 10;
+	display: flex;
+	align-items: center;
+	height: fit-content;
+}
+
+.rating {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	align-items: center;
+	justify-content: center;
+
+	width: 20px;
+}
+
+.star {
+	cursor: pointer;
+	width: 16px;
+	height: 16px;
+	color: #ababab;
+}
+
+.filled {
+	color: #f50 !important;
+}
+
+.hovered {
+	color: #ababab !important;
+}
+
+.number {
+	user-select: none;
+	font-size: 14px;
+	line-height: 20px;
+
+	&[data-highlighted="true"] {
+		color: var(--black);
+	}
+
+	&[data-highlighted="false"] {
+		color: var(--black);
+	}
+}

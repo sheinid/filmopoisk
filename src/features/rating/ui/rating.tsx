@@ -2,6 +2,7 @@ import { clsx } from "clsx";
 import { movieSlice } from "entities/movie";
 import { useAuth } from "features/auth/lib/useAuth";
 import { useEffect, useState } from "react";
+import { useDebounceCallback } from "shared/lib/debounce";
 import { Star } from "shared/ui/star";
 
 import styles from "./rating.module.css";
@@ -25,8 +26,6 @@ export const Rating = (props: RatingProps) => {
 		rate: number,
 	) => {
 		e.preventDefault();
-		e.stopPropagation();
-
 		const ratingValue = rate === rating ? 0 : rate;
 		setRating(ratingValue);
 
@@ -39,6 +38,8 @@ export const Rating = (props: RatingProps) => {
 			console.error(error);
 		}
 	};
+
+	const debouncedHandleRating = useDebounceCallback(handleRating, 500);
 
 	const handleMouseEnter = (rate: number) => {
 		setHoverRating(rate);
@@ -65,7 +66,10 @@ export const Rating = (props: RatingProps) => {
 				<div
 					key={value}
 					className={styles.rating}
-					onClick={(e) => handleRating(e, value)}
+					onClick={(e) => {
+						e.preventDefault();
+						debouncedHandleRating(e, value);
+					}}
 					onMouseEnter={() => handleMouseEnter(value)}
 					onMouseLeave={handleMouseLeave}
 				>

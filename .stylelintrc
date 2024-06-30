@@ -1,0 +1,9 @@
+{
+	"extends": [
+		"stylelint-config-standard",
+		"stylelint-config-clean-order/error"
+	],
+	"rules": {
+		"length-zero-no-unit": null
+	}
+}

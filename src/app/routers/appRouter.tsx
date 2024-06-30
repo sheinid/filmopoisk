@@ -1,20 +1,32 @@
+import { Layout } from "app/layout";
+import Movie from "pages/movie/ui/movie";
+import { Movies } from "pages/movies";
 import {
 	createBrowserRouter,
-	createRoutesFromElements,
-	Route,
+	RouteObject,
 	RouterProvider,
 } from "react-router-dom";
 
 export const AppRouter = () => {
-	const routes = createRoutesFromElements(
-		<Route path="/" element={<>Hello world</>}></Route>,
-	);
+	const routes: RouteObject[] = [
+		{
+			path: "/",
+			element: <Layout />,
+			errorElement: <div>Something went wrong</div>,
+			children: [
+				{
+					index: true,
+					element: <Movies />,
+				},
+				{
+					path: "/movie/:movieId",
+					element: <Movie />,
+				},
+			],
+		},
+	];
 
-	const router = createBrowserRouter(routes, {});
+	const router = createBrowserRouter(routes);
 
-	return (
-		<div className="app">
-			<RouterProvider router={router} />
-		</div>
-	);
+	return <RouterProvider router={router} />;
 };

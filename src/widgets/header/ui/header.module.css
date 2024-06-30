@@ -1,0 +1,25 @@
+.header {
+	position: sticky;
+	z-index: 10;
+	top: 0;
+	left: 0;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	width: 100%;
+	padding: 24px var(--padding-x);
+
+	background: var(--gray);
+}
+
+.logo {
+	user-select: none;
+
+	font-family: Roboto, sans-serif;
+	font-size: 32px;
+	font-weight: 700;
+	line-height: 1.17;
+	color: var(--white);
+}

@@ -1,0 +1,13 @@
+:root {
+	--white: #fff;
+	--background: #ededed;
+	--black: #1b1f23;
+	--gray: #333;
+	--light-gray: #e1e3e6;
+	--text-gray: #999fa6;
+	--orange: #f50;
+	--dark-orange: #e94e00;
+	--red: #f04075;
+	--padding-x: 32px;
+	--radius: 8px;
+}

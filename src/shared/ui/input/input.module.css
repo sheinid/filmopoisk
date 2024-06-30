@@ -1,0 +1,42 @@
+.label {
+	cursor: text;
+	display: block;
+	width: 100%;
+}
+
+.root {
+	position: relative;
+
+	display: flex;
+	gap: 8px;
+	align-items: center;
+
+	padding: 10px 12px;
+
+	background: var(--white);
+	border: 1px solid transparent;
+	border-radius: var(--radius);
+}
+
+.input {
+	width: 100%;
+
+	font-size: 14px;
+	line-height: 16px;
+
+	background: none;
+	border: none;
+	outline: none;
+}
+
+.root:hover {
+	border: 1px solid var(--light-gray);
+}
+
+.root:focus-within {
+	border: 1px solid var(--dark-orange);
+}
+
+.cross {
+	cursor: pointer;
+}

@@ -1,14 +1,13 @@
+"use client";
+
 import { movieSlice } from "entities/movie";
 import { Rating } from "features/rating";
 import Image from "next/image";
-import { useParams } from "react-router-dom";
 import { Loader } from "shared/ui/loader/loader";
 
 import styles from "./movie.module.css";
 
-export const Movie = () => {
-	const { movieId } = useParams();
-
+export const Movie = ({ movieId }: { movieId: string }) => {
 	const { data, isFetching } = movieSlice.useGetMovieQuery(movieId || "");
 
 	if (!isFetching && !data) {
@@ -24,7 +23,7 @@ export const Movie = () => {
 		<>
 			<section className={styles.container}>
 				<div className={styles.cover}>
-					<Image src={data?.poster || ""} alt="" />
+					<Image fill src={data?.poster || ""} alt="" />
 				</div>
 				<div className={styles.content}>
 					<div className={styles.header}>
@@ -61,7 +60,13 @@ export const Movie = () => {
 				<ul className={styles.list}>
 					{data?.actors.map((actor) => (
 						<li key={actor.name} className={styles.actor}>
-							<Image className={styles.actorphoto} src={actor.photo} alt="" />
+							<Image
+								width={160}
+								height={230}
+								className={styles.actorphoto}
+								src={actor.photo}
+								alt=""
+							/>
 							<span className={styles.actorname}>{actor.name}</span>
 						</li>
 					))}

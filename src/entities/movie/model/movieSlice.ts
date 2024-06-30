@@ -12,6 +12,7 @@ export const movieSlice = createApi({
 	baseQuery: fetchBaseQuery({
 		baseUrl: import.meta.env.VITE_API_URL,
 	}),
+	tagTypes: ["Movie"],
 	endpoints: (builder) => ({
 		getMovies: builder.query<
 			PaginatedResponse<ShortMovieInfo>,
@@ -27,9 +28,11 @@ export const movieSlice = createApi({
 					queryParams.append("title", params.title);
 				return `search?${queryParams.toString()}&page=${params.page}`;
 			},
+			providesTags: ["Movie"],
 		}),
 		getMovie: builder.query<FullMovieInfo, string>({
 			query: (id) => `movie/${id}`,
+			providesTags: ["Movie"],
 		}),
 		rateMovie: builder.mutation({
 			query: ({ id, rating }) => ({
@@ -41,6 +44,7 @@ export const movieSlice = createApi({
 				},
 				body: { movieId: id, user_rate: rating },
 			}),
+			invalidatesTags: ["Movie"],
 		}),
 	}),
 });

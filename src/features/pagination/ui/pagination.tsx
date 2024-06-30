@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import Arrow from "shared/assets/icons/arrow-right.svg";
@@ -42,7 +43,11 @@ export const Pagination = (props: PaginationProps) => {
 				disabled={current === 1 || total === 0}
 				onClick={() => navigate(current - 1 === 0 ? 1 : current - 1)}
 			>
-				<img src={Arrow} alt="arrow" style={{ transform: "rotate(180deg)" }} />
+				<Image
+					src={Arrow}
+					alt="arrow"
+					style={{ transform: "rotate(180deg)" }}
+				/>
 			</button>
 			<div className={styles.current}>{current}</div>
 			<button
@@ -50,7 +55,7 @@ export const Pagination = (props: PaginationProps) => {
 				disabled={current === total || total === 0}
 				onClick={() => navigate(current + 1)}
 			>
-				<img src={Arrow} alt="arrow" />
+				<Image src={Arrow} alt="arrow" />
 			</button>
 		</div>
 	);

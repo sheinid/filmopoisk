@@ -1,4 +1,4 @@
-import { Movies } from "pages/movies";
+import { Movies } from "_pages/movies";
 
 const Homepage = () => {
 	return <Movies />;

@@ -6,7 +6,7 @@ import { Genre, Year } from "entities/movie/model/types";
 import { Filters } from "features/filters/ui/filters";
 import { Pagination } from "features/pagination/ui/pagination";
 import { Search } from "features/search";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDebounce } from "shared/lib/debounce";
 import { useStoreDispatch } from "shared/lib/redux/useStoreDispatch";
@@ -19,6 +19,7 @@ import styles from "./movies.module.css";
 export const Movies = () => {
 	const dispatch = useStoreDispatch();
 
+	const router = useRouter();
 	const searchParams = useSearchParams();
 
 	const {
@@ -43,8 +44,6 @@ export const Movies = () => {
 		title: debouncedSearch,
 	});
 
-	console.log(searchParams);
-
 	useEffect(() => {
 		const paramsGenre = searchParams?.get("genre") || "";
 		const paramsYear = searchParams?.get("year") || "";
@@ -55,29 +54,6 @@ export const Movies = () => {
 		dispatch(filtersSlice.setTitle(paramsTitle));
 	}, [searchParams, dispatch]);
 
-	// useEffect(() => {
-	// 	const updatedParams: Record<string, string> = {
-	// 		...Object.fromEntries(params.entries()),
-	// 		genre: selectedGenre,
-	// 		year: selectedYear,
-	// 		title: debouncedSearch,
-	// 	};
-
-	// 	Object.entries(updatedParams).forEach(([key, value]) => {
-	// 		if (value === "" || value === "0") {
-	// 			delete updatedParams[key];
-	// 		}
-	// 	});
-
-	// 	setParams(updatedParams);
-	// }, [
-	// 	currentPage,
-	// 	selectedGenre,
-	// 	debouncedSearch,
-	// 	selectedYear,
-	// 	setParams,
-	// 	params,
-	// ]);
 	return (
 		<div className={styles.container}>
 			<div className={styles.sidebar}>

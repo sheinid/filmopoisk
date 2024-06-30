@@ -1,6 +1,6 @@
+import Movie from "_pages/movie/ui/movie";
+import { Movies } from "_pages/movies";
 import { Layout } from "app/layout";
-import Movie from "pages/movie/ui/movie";
-import { Movies } from "pages/movies";
 import {
 	createBrowserRouter,
 	RouteObject,

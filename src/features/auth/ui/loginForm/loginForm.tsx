@@ -1,6 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 
 import { loginThunk } from "entities/auth/model/loginThunk";
+import Image from "next/image";
 import { ChangeEvent, useReducer } from "react";
 import Cross from "shared/assets/icons/close.svg";
 import { useStoreDispatch } from "shared/lib/redux/useStoreDispatch";
@@ -75,7 +76,7 @@ export const LoginForm = (props: LoginFormProps) => {
 		<form className={styles.root} onSubmit={handleSubmit}>
 			<div className={styles.header}>
 				<span className={styles.title}>Авторизация</span>
-				<img className={styles.cross} src={Cross} alt="" onClick={onClose} />
+				<Image className={styles.cross} src={Cross} alt="" onClick={onClose} />
 			</div>
 			<div className={styles.inputs}>
 				<Input

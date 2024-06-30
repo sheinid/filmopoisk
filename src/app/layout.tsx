@@ -6,6 +6,8 @@ import { Header } from "widgets/header";
 
 import { Providers } from "./providers";
 
+import styles from "app/layout/layout.module.css";
+
 export const metadata: Metadata = {
 	title: "Фильмопоиск",
 };
@@ -19,8 +21,10 @@ export default function RootLayout({
 		<html lang="ru">
 			<Providers>
 				<body>
-					<Header />
-					<div id="root">{children}</div>
+					<div id="root">
+						<Header />
+						<main className={styles.main}>{children}</main>
+					</div>
 					<div id="portal-root"></div>
 				</body>
 			</Providers>

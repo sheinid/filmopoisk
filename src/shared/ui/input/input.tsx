@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import Image from "next/image";
 import {
 	ChangeEvent,
 	InputHTMLAttributes,
@@ -65,7 +66,7 @@ export const Input = (props: InputProps) => {
 					[styles.search]: isSearchInput,
 				})}
 			>
-				{icon && <img src={icon} alt="" className={styles.icon} />}
+				{icon && <Image src={icon} alt="" className={styles.icon} />}
 				<input
 					ref={inputRef}
 					id={id}
@@ -80,7 +81,7 @@ export const Input = (props: InputProps) => {
 					required={required}
 				/>
 				{value && (
-					<img
+					<Image
 						src={InputCrossIcon}
 						alt=""
 						className={styles.cross}

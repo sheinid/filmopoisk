@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { Rating } from "features/rating";
+import Image from "next/image";
 import Link from "next/link";
 
 import { ShortMovieInfo } from "../model/types";
@@ -13,7 +14,7 @@ export const MovieCard = (props: ShortMovieInfo) => {
 		<li className={styles.wrapper}>
 			<Link className={styles.root} href={`/movie/${id}`}>
 				<div className={styles.cover}>
-					<img src={poster} alt="" />
+					<Image fill src={poster} alt="" />
 				</div>
 				<div className={styles.container}>
 					<div className={styles.content}>

@@ -25,6 +25,7 @@ export const Rating = (props: RatingProps) => {
 		rate: number,
 	) => {
 		e.preventDefault();
+		e.stopPropagation();
 
 		const ratingValue = rate === rating ? 0 : rate;
 		setRating(ratingValue);

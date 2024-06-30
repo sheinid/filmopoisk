@@ -17,8 +17,11 @@ const filtersSlice = createSlice({
 		setTitle(state, action) {
 			state.title = action.payload;
 		},
+		setFilters(state, action) {
+			state = action.payload;
+		},
 	},
 });
 
-export const { setGenre, setYear, setTitle } = filtersSlice.actions;
+export const { setGenre, setYear, setTitle, setFilters } = filtersSlice.actions;
 export default filtersSlice.reducer;

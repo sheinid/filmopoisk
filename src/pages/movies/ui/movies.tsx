@@ -2,7 +2,10 @@ import { filtersSlice } from "entities/filters";
 import { MovieCard, movieSlice } from "entities/movie";
 import { Genre, Year } from "entities/movie/model/types";
 import { Filters } from "features/filters/ui/filters";
+import { Pagination } from "features/pagination/ui/pagination";
 import { Search } from "features/search";
+import { useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useDebounce } from "shared/lib/debounce";
 import { useStoreDispatch } from "shared/lib/redux/useStoreDispatch";
 import { useStoreSelector } from "shared/lib/redux/useStoreSelector";
@@ -14,6 +17,8 @@ import styles from "./movies.module.css";
 export const Movies = () => {
 	const dispatch = useStoreDispatch();
 
+	const [params, setParams] = useSearchParams();
+
 	const {
 		genre: selectedGenre,
 		year: selectedYear,
@@ -21,6 +26,8 @@ export const Movies = () => {
 	} = useStoreSelector((state) => state.filters);
 
 	const { debouncedValue: debouncedSearch } = useDebounce(search, 500);
+
+	const currentPage = parseInt(params.get("page") || "1", 10);
 
 	const {
 		data: movies,
@@ -30,9 +37,43 @@ export const Movies = () => {
 	} = movieSlice.useGetMoviesQuery({
 		genre: selectedGenre as Genre,
 		release_year: selectedYear as Year,
-		page: 1,
+		page: currentPage,
 		title: debouncedSearch,
 	});
+
+	useEffect(() => {
+		const paramsGenre = params.get("genre") || "";
+		const paramsYear = params.get("year") || "";
+		const paramsTitle = params.get("title") || "";
+
+		dispatch(filtersSlice.setGenre(paramsGenre));
+		dispatch(filtersSlice.setYear(paramsYear));
+		dispatch(filtersSlice.setTitle(paramsTitle));
+	}, [params, dispatch]);
+
+	useEffect(() => {
+		const updatedParams: Record<string, string> = {
+			...Object.fromEntries(params.entries()),
+			genre: selectedGenre,
+			year: selectedYear,
+			title: debouncedSearch,
+		};
+
+		Object.entries(updatedParams).forEach(([key, value]) => {
+			if (value === "" || value === "0") {
+				delete updatedParams[key];
+			}
+		});
+
+		setParams(updatedParams);
+	}, [
+		currentPage,
+		selectedGenre,
+		debouncedSearch,
+		selectedYear,
+		setParams,
+		params,
+	]);
 
 	return (
 		<div className={styles.container}>
@@ -58,6 +99,7 @@ export const Movies = () => {
 							<MovieCard key={movie.id} {...movie} />
 						))}
 				</ul>
+				<Pagination total={movies?.total_pages || 0} current={currentPage} />
 			</div>
 		</div>
 	);

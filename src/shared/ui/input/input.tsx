@@ -1,5 +1,11 @@
 import clsx from "clsx";
-import { ChangeEvent, InputHTMLAttributes, useRef, useState } from "react";
+import {
+	ChangeEvent,
+	InputHTMLAttributes,
+	useId,
+	useRef,
+	useState,
+} from "react";
 import InputCrossIcon from "shared/assets/icons/input-cross.svg";
 
 import styles from "./input.module.css";
@@ -8,6 +14,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 	className?: string;
 	icon?: string;
 	label?: string;
+	isSearchInput?: boolean;
 }
 
 export const Input = (props: InputProps) => {
@@ -21,6 +28,8 @@ export const Input = (props: InputProps) => {
 		onFocus,
 		icon,
 		label,
+		isSearchInput = false,
+		required,
 	} = props;
 
 	const [inputValue, setInputValue] = useState("");
@@ -42,14 +51,24 @@ export const Input = (props: InputProps) => {
 		}
 	};
 
+	const id = useId();
+
 	return (
-		<label htmlFor="input" className={styles.label}>
-			{label && <span className={styles.labelText}>{label}</span>}
-			<div className={clsx(styles.root, className)}>
+		<label htmlFor={id} className={styles.label}>
+			{label && (
+				<span data-is-required={required} className={styles.labeltext}>
+					{label}
+				</span>
+			)}
+			<div
+				className={clsx(styles.root, className, {
+					[styles.search]: isSearchInput,
+				})}
+			>
 				{icon && <img src={icon} alt="" className={styles.icon} />}
 				<input
 					ref={inputRef}
-					id="input"
+					id={id}
 					type="text"
 					placeholder={placeholder}
 					className={styles.input}
@@ -58,6 +77,7 @@ export const Input = (props: InputProps) => {
 					onBlur={onBlur}
 					onKeyDown={onKeyDown}
 					onFocus={onFocus}
+					required={required}
 				/>
 				{value && (
 					<img

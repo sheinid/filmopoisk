@@ -14,6 +14,7 @@ export const Search = (props: SearchProps) => {
 	return (
 		<div className={styles.root}>
 			<Input
+				isSearchInput
 				onChange={(e) => setSearch(e.target.value)}
 				value={search}
 				icon={SearchIcon}

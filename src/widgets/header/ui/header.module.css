@@ -23,3 +23,8 @@
 	line-height: 1.17;
 	color: var(--white);
 }
+
+.logout {
+	display: flex;
+	gap: 16px;
+}

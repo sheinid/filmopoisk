@@ -1,7 +1,23 @@
 .label {
 	cursor: text;
+
 	display: block;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+
 	width: 100%;
+}
+
+.labeltext {
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.labeltext[data-is-required="true"]::after {
+	content: "*";
+	margin-left: 4px;
+	color: var(--red);
 }
 
 .root {
@@ -14,8 +30,12 @@
 	padding: 10px 12px;
 
 	background: var(--white);
-	border: 1px solid transparent;
+	border: 1px solid var(--light-gray);
 	border-radius: var(--radius);
+}
+
+.search {
+	border: 1px solid transparent;
 }
 
 .input {

@@ -1,0 +1,32 @@
+.root {
+	display: flex;
+	flex-direction: column;
+	gap: 24px;
+	width: 344px;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.title {
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 20px;
+}
+
+.cross {
+	cursor: pointer;
+}
+
+.inputs {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.buttons {
+	display: flex;
+	gap: 8px;
+}

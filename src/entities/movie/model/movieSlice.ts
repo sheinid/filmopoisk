@@ -10,7 +10,7 @@ import {
 export const movieSlice = createApi({
 	reducerPath: "api",
 	baseQuery: fetchBaseQuery({
-		baseUrl: import.meta.env.VITE_API_URL,
+		baseUrl: process.env.NEXT_PUBLIC_API_URL,
 	}),
 	endpoints: (builder) => ({
 		getMovies: builder.query<

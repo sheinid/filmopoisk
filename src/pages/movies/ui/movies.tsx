@@ -1,11 +1,13 @@
+"use client";
+
 import { filtersSlice } from "entities/filters";
 import { MovieCard, movieSlice } from "entities/movie";
 import { Genre, Year } from "entities/movie/model/types";
 import { Filters } from "features/filters/ui/filters";
 import { Pagination } from "features/pagination/ui/pagination";
 import { Search } from "features/search";
+import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import { useSearchParams } from "react-router-dom";
 import { useDebounce } from "shared/lib/debounce";
 import { useStoreDispatch } from "shared/lib/redux/useStoreDispatch";
 import { useStoreSelector } from "shared/lib/redux/useStoreSelector";
@@ -17,7 +19,7 @@ import styles from "./movies.module.css";
 export const Movies = () => {
 	const dispatch = useStoreDispatch();
 
-	const [params, setParams] = useSearchParams();
+	const searchParams = useSearchParams();
 
 	const {
 		genre: selectedGenre,
@@ -27,7 +29,7 @@ export const Movies = () => {
 
 	const { debouncedValue: debouncedSearch } = useDebounce(search, 500);
 
-	const currentPage = parseInt(params.get("page") || "1", 10);
+	const currentPage = parseInt(searchParams?.get("page") || "1", 10);
 
 	const {
 		data: movies,
@@ -41,40 +43,41 @@ export const Movies = () => {
 		title: debouncedSearch,
 	});
 
+	console.log(searchParams);
+
 	useEffect(() => {
-		const paramsGenre = params.get("genre") || "";
-		const paramsYear = params.get("year") || "";
-		const paramsTitle = params.get("title") || "";
+		const paramsGenre = searchParams?.get("genre") || "";
+		const paramsYear = searchParams?.get("year") || "";
+		const paramsTitle = searchParams?.get("title") || "";
 
 		dispatch(filtersSlice.setGenre(paramsGenre));
 		dispatch(filtersSlice.setYear(paramsYear));
 		dispatch(filtersSlice.setTitle(paramsTitle));
-	}, [params, dispatch]);
+	}, [searchParams, dispatch]);
 
-	useEffect(() => {
-		const updatedParams: Record<string, string> = {
-			...Object.fromEntries(params.entries()),
-			genre: selectedGenre,
-			year: selectedYear,
-			title: debouncedSearch,
-		};
+	// useEffect(() => {
+	// 	const updatedParams: Record<string, string> = {
+	// 		...Object.fromEntries(params.entries()),
+	// 		genre: selectedGenre,
+	// 		year: selectedYear,
+	// 		title: debouncedSearch,
+	// 	};
 
-		Object.entries(updatedParams).forEach(([key, value]) => {
-			if (value === "" || value === "0") {
-				delete updatedParams[key];
-			}
-		});
+	// 	Object.entries(updatedParams).forEach(([key, value]) => {
+	// 		if (value === "" || value === "0") {
+	// 			delete updatedParams[key];
+	// 		}
+	// 	});
 
-		setParams(updatedParams);
-	}, [
-		currentPage,
-		selectedGenre,
-		debouncedSearch,
-		selectedYear,
-		setParams,
-		params,
-	]);
-
+	// 	setParams(updatedParams);
+	// }, [
+	// 	currentPage,
+	// 	selectedGenre,
+	// 	debouncedSearch,
+	// 	selectedYear,
+	// 	setParams,
+	// 	params,
+	// ]);
 	return (
 		<div className={styles.container}>
 			<div className={styles.sidebar}>

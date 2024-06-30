@@ -1,4 +1,5 @@
-import { useSearchParams } from "react-router-dom";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback } from "react";
 import Arrow from "shared/assets/icons/arrow-right.svg";
 
 import styles from "./pagination.module.css";
@@ -10,11 +11,24 @@ interface PaginationProps {
 
 export const Pagination = (props: PaginationProps) => {
 	const { current = 1, total } = props;
+	const searchParams = useSearchParams();
 
-	const [, setParams] = useSearchParams();
+	const pathname = usePathname();
+
+	const router = useRouter();
+
+	const createQueryString = useCallback(
+		(name: string, value: string) => {
+			const params = new URLSearchParams(searchParams?.toString());
+			params.set(name, value);
+
+			return params.toString();
+		},
+		[searchParams],
+	);
 
 	const navigate = (page: number) => {
-		setParams({ page: String(page) });
+		router.push(`${pathname}?${createQueryString("page", String(page))}`);
 	};
 
 	if (total === 0) {

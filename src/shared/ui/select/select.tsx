@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import ArrowDown from "shared/assets/icons/arrow-down.svg";
 
@@ -92,7 +93,7 @@ export const Select = (props: SelectProps) => {
 					</ul>
 				)}
 
-				<img
+				<Image
 					className={styles.arrow}
 					src={ArrowDown}
 					alt="select chevron down"

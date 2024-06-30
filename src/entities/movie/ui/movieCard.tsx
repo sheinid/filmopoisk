@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { Rating } from "features/rating";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 import { ShortMovieInfo } from "../model/types";
 
@@ -11,7 +11,7 @@ export const MovieCard = (props: ShortMovieInfo) => {
 
 	return (
 		<li className={styles.wrapper}>
-			<Link className={styles.root} to={`/movie/${id}`}>
+			<Link className={styles.root} href={`/movie/${id}`}>
 				<div className={styles.cover}>
 					<img src={poster} alt="" />
 				</div>
